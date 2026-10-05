@@ -1,0 +1,7 @@
+# Runtime dependencies for the Lambda container (no training or notebook tooling)
+tensorflow>=2.16
+numpy
+pillow
+fastapi
+python-multipart
+mangum

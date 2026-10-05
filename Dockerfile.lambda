@@ -1,0 +1,24 @@
+# syntax=docker/dockerfile:1
+# Lambda container image for the Waste Sorter app. Mirrors tablet_inspector's setup:
+# AWS's Lambda Python base image (includes the Runtime Interface Client), built
+# natively for arm64 on Apple Silicon and deployed as an arm64 function.
+#
+# python:3.13 is Amazon Linux 2023, which has prebuilt wheels for numpy/pillow/TF.
+FROM public.ecr.aws/lambda/python:3.13
+
+# Lambda's filesystem is read-only outside /tmp; Keras writes a config file on import.
+ENV KERAS_HOME=/tmp/.keras \
+    TF_CPP_MIN_LOG_LEVEL=2
+
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+COPY requirements-lambda.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements-lambda.txt
+
+COPY waste_classifier/ waste_classifier/
+COPY app/ app/
+# The trained model is git-ignored; train it first (see README) so these exist.
+COPY models/waste_classifier.keras models/waste_classifier.labels.json models/waste_classifier.metrics.json models/
+
+CMD ["app.lambda_handler.handler"]

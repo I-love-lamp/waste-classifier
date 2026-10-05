@@ -5,7 +5,9 @@ Take a photo of a piece of rubbish and Waste Sorter tells you which bin it goes 
 - **Brown bin**: organic waste, like food scraps, peels and eggshells
 - **Blue bin**: recyclables, like bottles, cans, jars, paper and cardboard
 
-It runs as a small web app on your own computer. You upload a photo, or pick one of the sample photos, and it shows the bin, how sure it is, and a tip on how to bin the item properly.
+**Try it:** https://ngahhit42suxp5ztt3wefaqp3i0pochj.lambda-url.eu-west-1.on.aws/ (the first load can take up to 10 seconds while the app wakes up)
+
+It's a small web app. You can use the hosted version above or run it on your own computer. You upload a photo, or pick one of the sample photos, and it shows the bin, how sure it is, and a tip on how to bin the item properly.
 
 ## How well it works
 
@@ -81,6 +83,7 @@ To score a model you already have and show the result in the app's "About" panel
 | `waste_classifier/` | The model: building it, training it, and using it to sort photos |
 | `notebooks/evaluate_and_tune.ipynb` | Scoring and tuning notebook |
 | `models/` | Where trained models are saved (not stored in git) |
+| `deploy/DEPLOY.md` | How to put the app on AWS Lambda |
 | `scripts/fetch_samples.py` | Downloads the sample photos again |
 | `waste_classifier.ipynb` | The original notebook this project started from |
 
@@ -88,15 +91,8 @@ To score a model you already have and show the result in the app's "About" panel
 
 - It only knows two bins. Items that belong in general waste, like nappies or crisp packets, will still be put in brown or blue.
 - It works best with one item per photo, in clear view.
-- Bin rules vary by area, so check with your local council if you're unsure.
+- Bin rules vary by area, so check with your local authority or county council if you're unsure.
 
-## Changes from the original notebook
-
-The original notebook had a few bugs that are fixed here:
-
-- **The labels were swapped.** It called organic items recyclable and recyclable items organic.
-- **Photos were prepared differently for training and for predictions.** The model saw slightly different-looking images when it was used than when it was trained.
-- **The test photos were used during training** to decide when to stop. That made the scores look better than they really were. The test photos are now only used for the final score.
 
 ## Credits
 

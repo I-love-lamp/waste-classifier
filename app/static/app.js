@@ -96,7 +96,7 @@ async function classifySample(sample) {
   classify(blob, { sample, credit });
 }
 
-function classifyFile(file) {
+async function classifyFile(file) {
   if (!file) return;
   if (!file.type.startsWith("image/")) {
     showError("That file isn't an image. Use a JPG, PNG or WebP photo.");
@@ -104,7 +104,26 @@ function classifyFile(file) {
   }
   activeSampleId = null;
   markActiveSample();
-  classify(file, { credit: escapeHtml(file.name || "Pasted image") });
+  classify(await shrinkImage(file), { credit: escapeHtml(file.name || "Pasted image") });
+}
+
+// The model only looks at 224x224 pixels, and the hosted app caps uploads at ~6 MB,
+// so scale big photos down in the browser before sending them.
+const MAX_SIDE = 1280;
+async function shrinkImage(file) {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const scale = MAX_SIDE / Math.max(bitmap.width, bitmap.height);
+    if (scale >= 1 && file.size < 1_500_000) return file;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * Math.min(scale, 1));
+    canvas.height = Math.round(bitmap.height * Math.min(scale, 1));
+    canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.9));
+    return blob ? new File([blob], (file.name || "photo").replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" }) : file;
+  } catch {
+    return file; // the browser can't decode it (e.g. HEIC); let the server try
+  }
 }
 
 async function classify(blob, { sample = null, credit = "" } = {}) {
