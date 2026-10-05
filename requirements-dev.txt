@@ -1,0 +1,8 @@
+-r requirements.txt
+# evaluation & tuning notebook
+scikit-learn
+pandas
+matplotlib
+jupyter
+ipykernel
+nbconvert

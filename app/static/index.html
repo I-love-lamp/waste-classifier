@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waste Sorter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><i class="lid-o"></i><i class="lid-r"></i></span>
+      <span class="brand-name">Waste Sorter</span>
+    </div>
+    <details class="model-chip" id="model-chip">
+      <summary><span class="dot"></span><span id="model-label">Loading model…</span></summary>
+      <div class="model-pop" id="model-detail"></div>
+    </details>
+  </header>
+
+  <details class="about" id="about">
+    <summary>About this project</summary>
+    <div class="about-body">
+      <p>
+        Waste Sorter tells you which bin an item belongs in from a single photo: <strong>organic</strong>
+        (brown bin) or <strong>recyclable</strong> (blue bin). It uses <span id="about-model">a convolutional neural network</span>
+        trained on 22,564 labelled photos from the
+        <a href="https://www.kaggle.com/datasets/techsash/waste-classification-data" target="_blank" rel="noopener">Kaggle Waste Classification</a>
+        dataset. For each photo the model returns a probability for both classes. The bin shown is the more likely one, and
+        anything under 75% confidence is flagged "Not sure" so you can check it by hand.
+      </p>
+      <p class="result-note" id="about-score">Loading model scores…</p>
+      <p>
+        <a href="https://github.com/I-love-lamp/waste-classifier/blob/master/README.md" target="_blank" rel="noopener">
+          Read the full write-up: model, training data, evaluation and tuning →</a>
+      </p>
+    </div>
+  </details>
+
+  <main class="layout">
+    <section class="panel scan" aria-labelledby="scan-title">
+      <div class="panel-head">
+        <h2 id="scan-title">Item</h2>
+        <label class="btn" for="file-input">Upload photo</label>
+        <input type="file" id="file-input" accept="image/*" hidden>
+      </div>
+      <div class="dropzone" id="dropzone" tabindex="0" aria-describedby="drop-hint">
+        <img id="preview" alt="" hidden>
+        <div class="scanline" aria-hidden="true"></div>
+        <p class="drop-hint" id="drop-hint">Drop a photo here, paste one, or pick a sample below.</p>
+      </div>
+      <p class="credit" id="credit"></p>
+    </section>
+
+    <section class="panel verdict" aria-labelledby="verdict-title" aria-live="polite">
+      <h2 id="verdict-title" class="visually-hidden">Result</h2>
+      <div class="bin" id="bin" data-label="">
+        <div class="bin-lid" aria-hidden="true"></div>
+        <div class="bin-body">
+          <p class="bin-eyebrow" id="bin-class">Waiting for an image</p>
+          <p class="bin-name" id="bin-name">—</p>
+          <p class="bin-conf"><span id="bin-conf">—</span></p>
+        </div>
+      </div>
+
+      <p class="notice" id="unsure" hidden>
+        <strong>Not sure about this one.</strong> The model is split, so check the item by hand before you bin it.
+      </p>
+      <p class="notice error" id="error" hidden></p>
+
+      <div class="split" aria-label="Probability split">
+        <div class="split-bar"><span class="split-o" id="split-o"></span><span class="split-r" id="split-r"></span></div>
+        <div class="split-legend">
+          <span><i class="key key-o"></i>Organic <b id="pct-o">–</b></span>
+          <span><i class="key key-r"></i>Recyclable <b id="pct-r">–</b></span>
+        </div>
+      </div>
+
+      <p class="advice" id="advice"></p>
+      <p class="check" id="check" hidden></p>
+
+      <div class="evidence" id="evidence-wrap" hidden>
+        <h3>What the model sees</h3>
+        <ol class="evidence-list" id="evidence"></ol>
+      </div>
+    </section>
+  </main>
+
+  <section class="samples" aria-labelledby="samples-title">
+    <div class="samples-head">
+      <h2 id="samples-title">Try a sample</h2>
+      <div class="filters" role="group" aria-label="Filter samples">
+        <button type="button" class="chip is-on" data-filter="all" id="filter-all">All</button>
+        <button type="button" class="chip" data-filter="O" id="filter-o">Brown bin</button>
+        <button type="button" class="chip" data-filter="R" id="filter-r">Blue bin</button>
+      </div>
+      <p class="score" id="score"></p>
+    </div>
+    <div class="sample-grid" id="sample-grid"></div>
+  </section>
+
+  <section class="history" aria-labelledby="history-title" id="history-section" hidden>
+    <h2 id="history-title">This session</h2>
+    <ol class="history-list" id="history"></ol>
+  </section>
+
+  <footer class="foot">
+    Sample photos from Wikimedia Commons under their stated licences. Results are a guide; check your local council's sorting rules.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

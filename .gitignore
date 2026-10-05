@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# trained models are large; keep them out of git
+models/*.keras
+models/*.labels.json
+models/*.metrics.json
+
+# Kaggle dataset
+DATASET/
+
+# notebook feature cache
+models/cache/
