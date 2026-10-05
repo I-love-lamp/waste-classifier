@@ -1,0 +1,101 @@
+[
+  {
+    "id": "banana-peel",
+    "name": "Banana peel",
+    "expected": "O",
+    "file": "banana-peel.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Banana_peel_2.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Anitamahotra"
+  },
+  {
+    "id": "rotten-apple",
+    "name": "Rotten apple",
+    "expected": "O",
+    "file": "rotten-apple.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Rotten_apple_under_the_tree.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Sally V"
+  },
+  {
+    "id": "kitchen-scraps",
+    "name": "Kitchen scraps",
+    "expected": "O",
+    "file": "kitchen-scraps.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kitchen_food_waste,_vegetable_peelings_%26_coffee_grounds_in_biodegradable_bag.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Tek monde"
+  },
+  {
+    "id": "eggshell",
+    "name": "Broken eggshell",
+    "expected": "O",
+    "file": "eggshell.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Broken_eggshell.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Chisola2006"
+  },
+  {
+    "id": "mouldy-bread",
+    "name": "Mouldy bread",
+    "expected": "O",
+    "file": "mouldy-bread.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Food_waste_with_moldy_bread.jpg",
+    "license": "CC BY 2.0",
+    "author": "Nick Saltmarsh"
+  },
+  {
+    "id": "plastic-bottle",
+    "name": "Plastic bottle",
+    "expected": "R",
+    "file": "plastic-bottle.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Botella_de_pl%C3%A1stico_-_PET.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Feralbt"
+  },
+  {
+    "id": "crushed-cans",
+    "name": "Crushed cans",
+    "expected": "R",
+    "file": "crushed-cans.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Crushed_cans_(9691248780).jpg",
+    "license": "CC BY 2.0",
+    "author": "Ruth Hartnup from Vancouver, Canada"
+  },
+  {
+    "id": "glass-jar",
+    "name": "Glass jar",
+    "expected": "R",
+    "file": "glass-jar.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Empty_Clear_Jar_(51330638811).jpg",
+    "license": "CC0",
+    "author": "Alabama Extension"
+  },
+  {
+    "id": "newspapers",
+    "name": "Newspapers",
+    "expected": "R",
+    "file": "newspapers.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:A_stack_of_newspapers.jpg",
+    "license": "CC BY-SA 2.0",
+    "author": "Daniel R. Blume from Orange County,  California, USA"
+  },
+  {
+    "id": "tin-can",
+    "name": "Tin can",
+    "expected": "R",
+    "file": "tin-can.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Empty_tin_can2009-01-19.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Sun Ladder"
+  },
+  {
+    "id": "packaging",
+    "name": "Food packaging",
+    "expected": "R",
+    "file": "packaging.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Several_Cartons.jpg",
+    "license": "Public domain",
+    "author": "Rlsheehan at English Wikipedia"
+  }
+]
